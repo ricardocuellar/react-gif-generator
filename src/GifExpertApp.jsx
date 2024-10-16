@@ -3,6 +3,7 @@
 
 import { useState } from "react";
 import { AddCategory } from "./components/AddCategory";
+import { GifGrid } from "./components/GifGrid";
 
 
 export const GifExpertApp = () => {
@@ -12,36 +13,40 @@ export const GifExpertApp = () => {
     const [categories, setCategories] = useState([ 'One Puch', 'DBZ' ]); //Vacio genera undefined
 
     
-    const onAddCategory = () =>{
+    const onAddCategory = (newCategory) =>{
+        if( categories.includes(newCategory) ) return;
         //Agregar nuevo elemento a las catgegorias. 
         //Toystory
-        const nuevaCategoria = 'Toy Story';
+        // const nuevaCategoria = 'Toy Story';
         // const updatedCategories = categories.push(nuevaCategoria);
         //No se usará el push (muta un objeto y React no muta el estado.)
         //Creamos un nuevo estado. 
-        setCategories([nuevaCategoria, ...categories]);
+        //console.log(newCategory);
+        setCategories([newCategory, ...categories]);
         // setCategories( cat => [...cat, nuevaCategoria]);
     }
 
   return (
     <>
-        {/* Titulo */}
+
         <h1>GifExpertApp</h1>
     
-        {/* Input */}
-        <AddCategory />
+
+        <AddCategory 
+        // setCategories={ setCategories } // No es incorrecto pero es más complicado entender
+            //On es cuando se esta emitiendo algo (evento)
+            onNewCategory={ (value) => onAddCategory (value) }
+
+        /> 
     
-        {/* Listado de Items Gifs */}
-        <button onClick={onAddCategory}>Agregar</button>
-        <ol>
-            { //Hay que agregar un aproperty key
-            categories.map( (category) => {
-                return <li key={ category }>{ category }</li>
-            }) 
-            }
-            {/* <li></li> */}
-        </ol>
-            {/* GifItem */}
+        { //Hay que agregar un aproperty key
+        categories.map( (category) => (
+                <GifGrid 
+                key={ category } 
+                category={ category } />
+            )) 
+        }
+           
     </>
   )
 }

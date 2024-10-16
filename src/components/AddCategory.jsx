@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export const AddCategory = () => {
+export const AddCategory = ({onNewCategory}) => {
 
     //Cada componente tiene su propio estado. 
     const [inputValue, setinputValue] = useState('One Punch');
@@ -13,11 +13,19 @@ export const AddCategory = () => {
 
     const onSubmit = ( event ) => {
         event.preventDefault();
-        console.log(inputValue);
+
+        if(inputValue.trim().length <= 1) return;
+
+        //Accediendo por callback accedemos a su getValue
+        // setCategories( categories => [inputValue, ...categories]);
+        onNewCategory( inputValue.trim() );
+        setinputValue('');
     }
 
   return (
-    <form action="" onSubmit={ (event) => onSubmit(event) }> 
+    // <form action="" onSubmit={ (event) => onSubmit(event) }> 
+    <form action="" onSubmit={ onSubmit }> 
+
         <input
             type="text"
             placeholder="Buscar Gifs"
