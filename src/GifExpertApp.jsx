@@ -10,7 +10,7 @@ export const GifExpertApp = () => {
     
     //State esta basado en suposición
     //No se puede poner una condición y poner un hook de react dentro. !!! pierde relación. NO SE DEBE CONDICIONAR EL HOOKS
-    const [categories, setCategories] = useState([ 'One Puch', 'DBZ' ]); //Vacio genera undefined
+    const [categories, setCategories] = useState([ 'One Puch' ]); //Vacio genera undefined
 
     
     const onAddCategory = (newCategory) =>{
