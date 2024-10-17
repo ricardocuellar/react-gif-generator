@@ -1,4 +1,4 @@
-# GifGenerato (React + Vite)
+# GifGenerator (React + Vite)
 
 Repository of Gif Generator project. 
 
